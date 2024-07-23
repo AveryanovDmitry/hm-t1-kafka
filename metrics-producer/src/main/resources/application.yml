@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: metrics-producer
+  kafka:
+    template:
+      default-topic: metrics-topic
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics
+
+server:
+  port: 8091
