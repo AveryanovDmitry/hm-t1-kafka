@@ -1,0 +1,25 @@
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+    links:
+      - zookeeper
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: metric-db
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_DB=metric
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
